@@ -6,9 +6,12 @@ const clearEl = document.querySelector(".btn");
 
 let list = JSON.parse(localStorage.getItem("list"));
 
-list.forEach((task) => {
-  createItems(task);
-});
+if (list) {
+  list.forEach((task) => {
+    createItems(task);
+  });
+}
+
 formEl.addEventListener("submit", (event) => {
   event.preventDefault();
   createItems();
