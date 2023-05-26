@@ -14,12 +14,20 @@ if (list) {
 
 formEl.addEventListener("submit", (event) => {
   event.preventDefault();
-  notificationEl.innerHTML = `<span>${itemNameEl.value}</span> Added`;
-  createItems();
-  notificationEl.classList.add("show");
-  setTimeout(() => {
-    notificationEl.classList.remove("show");
-  }, 1000);
+  if (itemNameEl.value == "") {
+    notificationEl.innerHTML = `<span>Please Enter Something</span>`;
+    notificationEl.classList.add("show");
+    setTimeout(() => {
+      notificationEl.classList.remove("show");
+    }, 1500);
+  } else {
+    notificationEl.innerHTML = `<span>${itemNameEl.value}</span> Added`;
+    createItems();
+    notificationEl.classList.add("show");
+    setTimeout(() => {
+      notificationEl.classList.remove("show");
+    }, 1500);
+  }
 });
 
 function createItems(task) {
@@ -37,7 +45,7 @@ function createItems(task) {
 
   itemNameEl.value = "";
   const renameBtnEl = document.createElement("div");
-  renameBtnEl.innerHTML = `<i class="fa-regular fa-pen-to-square rename"></i>`;
+  // renameBtnEl.innerHTML = `<i class="fa-regular fa-pen-to-square rename"></i>`;
 
   const checkBtnEl = document.createElement("div");
   checkBtnEl.innerHTML = `<i class="fa-regular fa-square checked"></i>`;
