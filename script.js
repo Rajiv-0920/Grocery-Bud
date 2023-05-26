@@ -104,8 +104,8 @@ function createItems(task) {
     setTimeout(() => {
       notificationEl.classList.remove("show");
     }, 1000);
+    updateLocalStorage();
   });
-  updateLocalStorage();
 }
 
 function updateLocalStorage() {
