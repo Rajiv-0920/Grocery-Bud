@@ -14,8 +14,8 @@ if (list) {
 
 formEl.addEventListener("submit", (event) => {
   event.preventDefault();
-  createItems();
   notificationEl.innerHTML = `<span>${itemNameEl.value}</span> Added`;
+  createItems();
   notificationEl.classList.add("show");
   setTimeout(() => {
     notificationEl.classList.remove("show");
