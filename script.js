@@ -11,12 +11,12 @@ list.forEach((task) => {
 });
 formEl.addEventListener("submit", (event) => {
   event.preventDefault();
+  createItems();
   notificationEl.innerHTML = `<span>${itemNameEl.value}</span> Added`;
   notificationEl.classList.add("show");
   setTimeout(() => {
     notificationEl.classList.remove("show");
   }, 1000);
-  createItems();
 });
 
 function createItems(task) {
