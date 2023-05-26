@@ -106,6 +106,7 @@ function createItems(task) {
     }, 1000);
     updateLocalStorage();
   });
+  updateLocalStorage();
 }
 
 function updateLocalStorage() {
