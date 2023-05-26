@@ -4,6 +4,11 @@ const addEl = document.querySelector("#add");
 const notificationEl = document.querySelector(".works");
 const clearEl = document.querySelector(".btn");
 
+let list = JSON.parse(localStorage.getItem("list"));
+
+list.forEach((task) => {
+  createItems(task);
+});
 formEl.addEventListener("submit", (event) => {
   event.preventDefault();
   notificationEl.innerHTML = `<span>${itemNameEl.value}</span> Added`;
@@ -14,7 +19,7 @@ formEl.addEventListener("submit", (event) => {
   createItems();
 });
 
-function createItems() {
+function createItems(task) {
   const totalItemsEl = document.querySelector(".total-items");
   const itemEl = document.createElement("li");
   // itemEl.innerHTML = itemNameEl.value;
@@ -23,6 +28,9 @@ function createItems() {
 
   const text = document.createElement("p");
   text.innerText = itemNameEl.value;
+  if (task) {
+    text.innerText = task.name;
+  }
 
   itemNameEl.value = "";
   const renameBtnEl = document.createElement("div");
@@ -47,9 +55,15 @@ function createItems() {
     setTimeout(() => {
       notificationEl.classList.remove("show");
     }, 1000);
+    updateLocalStorage();
   });
 
   const checkEl = checkBtnEl.firstChild;
+  if (task && task.checked) {
+    itemEl.classList.add("check");
+    checkEl.classList.toggle("fa-square-check");
+    checkEl.classList.toggle("fa-square");
+  }
   checkEl.addEventListener("click", () => {
     checkEl.classList.toggle("fa-square");
     checkEl.classList.toggle("fa-square-check");
@@ -70,6 +84,7 @@ function createItems() {
         notificationEl.classList.remove("show");
       }, 2000);
     }
+    updateLocalStorage();
   });
 
   // Rename Button is Not Working at this time....
@@ -90,4 +105,17 @@ function createItems() {
       notificationEl.classList.remove("show");
     }, 1000);
   });
+  updateLocalStorage();
+}
+
+function updateLocalStorage() {
+  const liEls = document.querySelectorAll("li");
+  list = [];
+  liEls.forEach((liEl) => {
+    list.push({
+      name: liEl.innerText,
+      checked: liEl.classList.contains("check"),
+    });
+  });
+  localStorage.setItem("list", JSON.stringify(list));
 }
